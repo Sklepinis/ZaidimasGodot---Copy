@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d16ers265rifw"
+path="res://.godot/imported/Platformer Underground Level Game Music - Royalty Free Music.mp3-b23de9dd40e60d04a2e1556a312cf2f2.mp3str"
+
+[deps]
+
+source_file="res://Assets/UIAudio/Platformer Underground Level Game Music - Royalty Free Music.mp3"
+dest_files=["res://.godot/imported/Platformer Underground Level Game Music - Royalty Free Music.mp3-b23de9dd40e60d04a2e1556a312cf2f2.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

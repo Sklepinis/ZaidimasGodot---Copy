@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://blu3qf10c8e6s"]
+
+[ext_resource type="Script" path="res://Scripts/cube.gd" id="1_0ced2"]
+[ext_resource type="PackedScene" uid="uid://ctl7cyu38g3uv" path="res://Scenes/killzone.tscn" id="2_os11x"]
+[ext_resource type="Texture2D" uid="uid://blpcrlfuhelnp" path="res://Assets/Tilemap/tilemap-characters_packed.png" id="3_3fyoo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipt53"]
+size = Vector2(18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hel4f"]
+atlas = ExtResource("3_3fyoo")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldr2r"]
+atlas = ExtResource("3_3fyoo")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xau3w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hel4f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldr2r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Cube" type="Node2D"]
+script = ExtResource("1_0ced2")
+
+[node name="Killzone" parent="." instance=ExtResource("2_os11x")]
+position = Vector2(12, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-12, -5)
+shape = SubResource("RectangleShape2D_ipt53")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xau3w")
+frame_progress = 0.0790967
+
+[node name="Up" type="RayCast2D" parent="."]
+target_position = Vector2(0, -15)
+
+[node name="Down" type="RayCast2D" parent="."]
+target_position = Vector2(0, 15)

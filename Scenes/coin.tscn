@@ -1,0 +1,153 @@
+[gd_scene load_steps=11 format=3 uid="uid://8hp4phuhbxs5"]
+
+[ext_resource type="Texture2D" uid="uid://bm4cf8weq0ogi" path="res://Assets/Tilemap/tilemap_packed.png" id="1_8lsek"]
+[ext_resource type="Script" path="res://Scripts/coin.gd" id="1_lvc0s"]
+[ext_resource type="AudioStream" uid="uid://bmqltqrsqi1o3" path="res://Assets/UIAudio/confirmation_001.ogg" id="3_gd5xs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xlidl"]
+atlas = ExtResource("1_8lsek")
+region = Rect2(198, 128, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1y7h"]
+atlas = ExtResource("1_8lsek")
+region = Rect2(216, 128, 18, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjkqh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xlidl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1y7h")
+}],
+"loop": true,
+"name": &"coin",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e5vdp"]
+radius = 5.0
+
+[sub_resource type="Animation" id="Animation_37vfg"]
+resource_name = "Pickup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PickUp:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_47rsp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PickUp:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3s7qh"]
+_data = {
+"Pickup": SubResource("Animation_37vfg"),
+"RESET": SubResource("Animation_47rsp")
+}
+
+[node name="coin" type="Area2D"]
+scale = Vector2(0.599999, 0.599999)
+collision_mask = 2
+script = ExtResource("1_lvc0s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fjkqh")
+animation = &"coin"
+autoplay = "coin"
+frame_progress = 0.948745
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_e5vdp")
+
+[node name="PickUp" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gd5xs")
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3s7qh")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

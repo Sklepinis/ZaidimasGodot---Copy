@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds6w36g7v2qma"]
+
+[ext_resource type="Script" path="res://Scripts/mainmenu.gd" id="1_6uf2y"]
+[ext_resource type="Texture2D" uid="uid://befa1bdxjglfh" path="res://Assets/Tilemap/tilemap-backgrounds_packed.png" id="2_gaax1"]
+[ext_resource type="FontFile" uid="uid://rw4ogjbebauk" path="res://Assets/Font/kenvector_future.ttf" id="3_au6i7"]
+[ext_resource type="FontFile" uid="uid://c36bod8rshvag" path="res://Assets/Font/kenvector_future_thin.ttf" id="4_40mcl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ya8r"]
+font = ExtResource("3_au6i7")
+font_size = 40
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 13
+shadow_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+shadow_offset = Vector2(3, 3)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -7.0
+offset_right = -1.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6uf2y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gaax1")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="separator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Game title"
+label_settings = SubResource("LabelSettings_7ya8r")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Start Game" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_40mcl")
+text = "Play"
+
+[node name="Shop" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Shop"
+
+[node name="Achievements" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Achievements"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/Shop" to="." method="_on_shop_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/Achievements" to="." method="_on_achievements_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/Quit" to="." method="_on_quit_pressed"]

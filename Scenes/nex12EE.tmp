@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://blh6kn8o0j6ws"]
+
+[ext_resource type="Script" path="res://Scripts/Next_level.gd" id="1_4h85o"]
+[ext_resource type="Texture2D" uid="uid://bm4cf8weq0ogi" path="res://Assets/Tilemap/tilemap_packed.png" id="2_77mdv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55jgw"]
+size = Vector2(18, 37)
+
+[node name="Next_level" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_4h85o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_77mdv")
+region_enabled = true
+region_rect = Rect2(198, 89, 18, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_55jgw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

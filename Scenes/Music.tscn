@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbx2yevd7r0oi"]
+
+[ext_resource type="AudioStream" uid="uid://7cma3ogxb7v4" path="res://Assets/UIAudio/Platformer First Level Game Music - Royalty Free Music.mp3" id="1_i8pus"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_i8pus")
+autoplay = true
+bus = &"Music"

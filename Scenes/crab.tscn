@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://jfj4nqdaykxs"]
+
+[ext_resource type="Texture2D" uid="uid://blpcrlfuhelnp" path="res://Assets/Tilemap/tilemap-characters_packed.png" id="1_rrj6l"]
+[ext_resource type="Script" path="res://Scripts/crab.gd" id="1_vqgeo"]
+[ext_resource type="PackedScene" uid="uid://ctl7cyu38g3uv" path="res://Scenes/killzone.tscn" id="2_p5noa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jc5n"]
+atlas = ExtResource("1_rrj6l")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s6oa"]
+atlas = ExtResource("1_rrj6l")
+region = Rect2(96, 48, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_67vbh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jc5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s6oa")
+}],
+"loop": true,
+"name": &"Monster",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oj1sl"]
+size = Vector2(22, 16)
+
+[node name="Crab" type="Node2D"]
+z_index = 100
+script = ExtResource("1_vqgeo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_67vbh")
+animation = &"Monster"
+autoplay = "Monster"
+frame_progress = 0.444669
+flip_h = true
+
+[node name="Killzone" parent="." instance=ExtResource("2_p5noa")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_oj1sl")
+
+[node name="Right" type="RayCast2D" parent="."]
+target_position = Vector2(15, 0)
+
+[node name="Left" type="RayCast2D" parent="."]
+target_position = Vector2(-14, 0)

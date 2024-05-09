@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds6w36g7v2qma"]
+
+[ext_resource type="Script" path="res://Scripts/mainmenu.gd" id="1_6uf2y"]
+[ext_resource type="AudioStream" uid="uid://4r7bgtkbj7ij" path="res://Assets/UIAudio/Platformer Menu Music Game Music - Royalty Free Music.mp3" id="2_dnj7n"]
+[ext_resource type="Texture2D" uid="uid://befa1bdxjglfh" path="res://Assets/Tilemap/tilemap-backgrounds_packed.png" id="2_gaax1"]
+[ext_resource type="FontFile" uid="uid://rw4ogjbebauk" path="res://Assets/Font/kenvector_future.ttf" id="3_au6i7"]
+[ext_resource type="FontFile" uid="uid://c36bod8rshvag" path="res://Assets/Font/kenvector_future_thin.ttf" id="4_40mcl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ya8r"]
+font = ExtResource("3_au6i7")
+font_size = 40
+outline_size = 11
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 13
+shadow_color = Color(0.00392157, 0.00392157, 0.00392157, 1)
+shadow_offset = Vector2(3, 3)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6uf2y")
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(506, 258)
+stream = ExtResource("2_dnj7n")
+autoplay = true
+bus = &"Music"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_gaax1")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="separator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Jumpy!"
+label_settings = SubResource("LabelSettings_7ya8r")
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/v_separation = 5
+
+[node name="Start Game" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_40mcl")
+text = "Play"
+icon_alignment = 1
+expand_icon = true
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_40mcl")
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/GridContainer/Quit" to="." method="_on_quit_pressed"]

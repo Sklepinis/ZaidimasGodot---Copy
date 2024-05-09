@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dimyp0bnusiji"]
+
+[ext_resource type="Script" path="res://Scripts/pausemenu.gd" id="1_js3sk"]
+[ext_resource type="FontFile" uid="uid://rw4ogjbebauk" path="res://Assets/Font/kenvector_future.ttf" id="2_tdi2l"]
+[ext_resource type="FontFile" uid="uid://c36bod8rshvag" path="res://Assets/Font/kenvector_future_thin.ttf" id="3_n06ss"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_usd5n"]
+font = ExtResource("2_tdi2l")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Pausemenu" type="Control"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_js3sk")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.52, 1.52)
+theme_override_constants/v_separation = 8
+
+[node name="Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Paused!"
+label_settings = SubResource("LabelSettings_usd5n")
+
+[node name="Resume" type="Button" parent="GridContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n06ss")
+text = "Resume"
+
+[node name="Restart" type="Button" parent="GridContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n06ss")
+text = "Restart"
+
+[node name="Quit" type="Button" parent="GridContainer"]
+process_mode = 3
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_n06ss")
+text = "Quit"
+
+[connection signal="pressed" from="GridContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GridContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="GridContainer/Quit" to="." method="_on_quit_pressed"]

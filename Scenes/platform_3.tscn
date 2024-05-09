@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm1k3ftpsuoce"]
+
+[ext_resource type="Texture2D" uid="uid://glv4tcsks50b" path="res://Assets/cakeland/tilemap_packed.png" id="1_1etot"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjxwf"]
+size = Vector2(54, 18)
+
+[node name="Platform3" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1etot")
+region_enabled = true
+region_rect = Rect2(180, 18, 54, 18)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rjxwf")
+one_way_collision = true
